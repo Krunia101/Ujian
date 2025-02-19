@@ -6,18 +6,25 @@ export class Book extends BaseEntity {
   id: number;
 
   @Column()
-  title:string
+  title: string;
 
   @Column()
-  author : string
+  author: string;
 
-  @Column({type: 'text'})
-  description : string
+  @Column({ type: 'text' })
+  description: string;
+
+  @Column({ type: 'int' })
+  year: number;
 
   @Column({
-    type: 'datetime', default: () => 'CURRENT_TIMESTAMP',})
+    type: 'datetime',
+    default: () => 'CURRENT_TIMESTAMP',
+  })
   created_at: Date;
   @Column({
-    type: 'datetime', default: () => 'CURRENT_TIMESTAMP',})
+    type: 'datetime',
+    default: () => 'CURRENT_TIMESTAMP',
+  })
   updated_at: Date;
 }

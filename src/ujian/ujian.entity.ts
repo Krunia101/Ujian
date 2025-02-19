@@ -2,6 +2,9 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('siswa')
 export class Siswa {
+  map(arg0: (item: any) => { id: any; nama: any }) {
+    throw new Error('Method not implemented.');
+  }
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -11,7 +14,7 @@ export class Siswa {
   @Column({ unique: true })
   email: string;
 
-  @Column({type : 'text'})
+  @Column({ type: 'text' })
   tempat_lahir: string;
 
   @Column()
@@ -23,6 +26,12 @@ export class Siswa {
   @Column()
   nik: string;
 
-  @Column({type : 'text'})
+  @Column({ type: 'text' })
   alamat: string;
+
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  created_at: Date;
+
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  updated_at: Date;
 }

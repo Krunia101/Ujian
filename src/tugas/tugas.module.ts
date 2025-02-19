@@ -4,6 +4,6 @@ import { TugasService } from './tugas.service';
 
 @Module({
   controllers: [TugasController],
-  providers: [TugasService]
+  providers: [TugasService],
 })
 export class TugasModule {}

@@ -6,10 +6,8 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Book } from './book.entity';
-import { Any, Between, Like, Repository } from 'typeorm';
-import { AnyTxtRecord, promises } from 'dns';
+import { Between, Like, Repository } from 'typeorm';
 import { ResponsePagination, ResponseSuccess } from 'src/Interpace';
-import { find, take } from 'rxjs';
 import BaseResponse from 'src/utils/response.utils';
 import { CreateBookDTO, UpdateBookDTO } from './book.dto';
 import { FindBookDto } from './book.dto';
@@ -37,6 +35,7 @@ export class BookService extends BaseResponse {
       author,
       description,
       keyword,
+      year,
       to_year,
       from_year,
     } = query;
@@ -46,22 +45,25 @@ export class BookService extends BaseResponse {
     } = {};
 
     const Search: {
-       [key: string]: any 
-      }[] = [];
+      [key: string]: any;
+    }[] = [];
 
-    if (keyword){
+    if (keyword) {
       Search.push(
-        {title: Like(`%${keyword}%`)},
-        {author: Like(`%${keyword}%`)},
-        {description: Like(`%${keyword}%`)},
-        )
-
-    }else {
+        { title: Like(`%${keyword}%`) },
+        { author: Like(`%${keyword}%`) },
+        { description: Like(`%${keyword}%`) },
+        { year: Like(`%${keyword}%`) },
+      );
+    } else {
       if (title) {
         filter.title = Like(`%${title}%`);
       }
       if (author) {
         filter.author = Like(`%${author}%`);
+      }
+      if (year) {
+        filter.year = Like(`%${year}%`);
       }
       if (description) {
         filter.description = Like(`%${description}%`);
@@ -69,8 +71,7 @@ export class BookService extends BaseResponse {
       if (from_year && to_year) {
         filter.year = Between(from_year, to_year);
       }
-  
-    } 
+    }
 
     console.log(filter);
     console.log(keyword);
@@ -106,8 +107,7 @@ export class BookService extends BaseResponse {
 
   async add(payload: CreateBookDTO): Promise<ResponseSuccess> {
     try {
-      const save = await this.bookrepository.save(payload);
-
+      await this.bookrepository.save(payload);
       return {
         status: 'Succes',
         message: 'Buku Berhasil ditambah',
@@ -140,6 +140,7 @@ export class BookService extends BaseResponse {
       const result = await this.bookrepository.update(id, {
         title: payload.title,
         author: payload.author,
+        year: payload.year,
         description: payload.description,
       });
       // const result = await this.bookrepository.update({id:id},{

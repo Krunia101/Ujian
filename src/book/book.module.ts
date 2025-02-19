@@ -8,6 +8,6 @@ import { Book } from './book.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([Book])],
   controllers: [BookController],
-  providers: [BookService]
+  providers: [BookService],
 })
 export class BookModule {}

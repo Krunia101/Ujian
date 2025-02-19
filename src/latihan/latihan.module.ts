@@ -4,6 +4,6 @@ import { LatihanService } from './latihan.service';
 
 @Module({
   controllers: [LatihanController],
-  providers: [LatihanService]
+  providers: [LatihanService],
 })
 export class LatihanModule {}

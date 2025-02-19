@@ -7,29 +7,28 @@ export class AppController {
 
   @Post()
   create(): string {
-    return "Ok!";
+    return 'Ok!';
   }
-  @Post("tes")
+  @Post('tes')
   create2(): string {
-    return "Ok! tes";
+    return 'Ok! tes';
   }
   @Get()
   getHello(): string {
-    return "Belajar Routing NestJS";
+    return 'Belajar Routing NestJS';
   }
 
-  @Get("list")
+  @Get('list')
   getHello2(): string {
-    return "Belajar Routing NestJS dengan NestJS.";
+    return 'Belajar Routing NestJS dengan NestJS.';
   }
 
   @Put()
-  update(){
-    return "Ini untuk update";
+  update() {
+    return 'Ini untuk update';
   }
-  @Put("update")
-  update2(){
-    return "Ini untuk update-update";
+  @Put('update')
+  update2() {
+    return 'Ini untuk update-update';
   }
-
 }

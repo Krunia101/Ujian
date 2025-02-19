@@ -4,9 +4,7 @@ import { query } from 'express';
 
 @Controller('latihan')
 export class LatihanController {
-  constructor(
-    private readonly latihanService: LatihanService
-  ) {}
+  constructor(private readonly latihanService: LatihanService) {}
 
   @Get()
   getHello(@Query() query: any) {
@@ -17,7 +15,7 @@ export class LatihanController {
   findAll(@Query() query: any) {
     return {
       method: 'GET',
-      query: query
+      query: query,
     };
   }
 
@@ -35,20 +33,19 @@ export class LatihanController {
   }
 
   @Post('simpan')
-    register(@Body() payload:any) {
-      return {
-        method : 'GET',
-        payload : payload
-      }
+  register(@Body() payload: any) {
+    return {
+      method: 'GET',
+      payload: payload,
+    };
   }
 
   @Post('update/:id')
-    updater(@Param('id') id: string,@Body() payload:any) {
-      return {
-        method : 'GET',
-        id_user: `${id}`,
-        payload : payload
-      }
+  updater(@Param('id') id: string, @Body() payload: any) {
+    return {
+      method: 'GET',
+      id_user: `${id}`,
+      payload: payload,
+    };
   }
-
 }

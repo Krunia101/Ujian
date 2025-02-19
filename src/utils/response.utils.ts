@@ -1,10 +1,10 @@
-import { match } from 'assert';
 import { ResponsePagination, ResponseSuccess } from 'src/Interpace';
 
 class BaseResponse {
-  _success(message: string, data: any): ResponseSuccess {
+  _succes(message: string, data?: any): ResponseSuccess {
     return {
       status: 'Success',
+
       message: message,
       data: data || {},
     };
@@ -15,19 +15,25 @@ class BaseResponse {
     data: any,
     total: number,
     page: number,
-    pagesize: number,
+    PageSize: number,
   ): ResponsePagination {
+    const total_page = Math.ceil(total / PageSize);
+    const next_page = page < total_page ? page + 1 : 0;
+    const previousPage = page > 1 ? page - 1 : 1;
     return {
       status: 'Success',
       message: message,
       data: data || {},
       pagination: {
-        total: total,
+        total_page: total_page,
         page: page,
-        pagesize: pagesize,
-        totalpage: Math.ceil(page / pagesize),
+        total: total,
+        next_page: next_page,
+        pageSize: PageSize,
+        previousPage: previousPage,
       },
     };
   }
 }
-export default BaseResponse
+
+export default BaseResponse;

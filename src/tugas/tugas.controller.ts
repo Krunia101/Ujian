@@ -1,4 +1,13 @@
-import {  Controller,  Get,  Post,  Param,  Put,  Delete,  Body,  Query,} from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Param,
+  Put,
+  Delete,
+  Body,
+  Query,
+} from '@nestjs/common';
 
 @Controller('tugas')
 export class TugasController {
@@ -30,7 +39,7 @@ export class TugasController {
   delete(@Param('id') id: any) {
     return {
       status: 'succes',
-      msg : `id player ${id} di hapus`,
+      msg: `id player ${id} di hapus`,
     };
   }
 }
